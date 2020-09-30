@@ -6,7 +6,7 @@ namespace Employee_Wage_Computation_OOPS
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Welcome to Employee Wage Computation Program !");
         }
     }
 }
