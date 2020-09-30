@@ -6,19 +6,21 @@ namespace Employee_Wage_Computation_OOPS
     {
         static void Main(string[] args)
         {
+            //constants
             int IS_PRESENT = 1;
+            int WAGE_PER_HOUR = 20;
+            //variables
+            int empHrs = 0;
+            int empWage = 0;
+            //Computation of wage
             Random rand = new Random();
             int empCheck = rand.Next(0, 2);
-            //1 => present and 0 => absent
             if (empCheck == IS_PRESENT)
             {
-                Console.WriteLine("Employee is present");
+                empHrs = 8;
             }
-            else
-            {
-                Console.WriteLine("Employee is absent");
-            }
+            empWage = empHrs * WAGE_PER_HOUR;
+            Console.WriteLine("Employee wage :" + empWage);
         }
-
     }
 }
