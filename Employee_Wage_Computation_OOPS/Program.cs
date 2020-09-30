@@ -6,7 +6,19 @@ namespace Employee_Wage_Computation_OOPS
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Employee Wage Computation Program !");
+            int IS_PRESENT = 1;
+            Random rand = new Random();
+            int empCheck = rand.Next(0, 2);
+            //1 => present and 0 => absent
+            if (empCheck == IS_PRESENT)
+            {
+                Console.WriteLine("Employee is present");
+            }
+            else
+            {
+                Console.WriteLine("Employee is absent");
+            }
         }
+
     }
 }
