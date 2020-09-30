@@ -7,45 +7,48 @@ namespace Employee_Wage_Computation_OOPS
         //constants
         public const int IS_FULL_TIME = 1;
         public const int IS_PART_TIME = 2;
-        public const int WAGE_PER_HOUR = 20;
-        public const int NUM_OF_WORKING_DAYS = 20;
-        public const int MAX_HRS_IN_MONTH = 100;
-        public static int ComputeEmpWage()
+        public static int CalculateWorkHrs()
+        {
+            Random random = new Random();
+            int empCheck = random.Next(0, 3);
+            int workHrs = 0;
+            switch (empCheck)
+            {
+                case IS_FULL_TIME:
+                    workHrs = 8;
+                    break;
+                case IS_PART_TIME:
+                    workHrs = 4;
+                    break;
+                default:
+                    workHrs = 0;
+                    break;
+            }
+            return workHrs;
+        }
+        public static void ComputeEmpWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)
         {
             //variables
             int empHrs = 0;
             int totalEmpHrs = 0;
             int totalWorkingDays = 0;
+            Console.WriteLine("Employee wage details of " + company + " : ");
             //Computation
-            while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS)
+            while (totalEmpHrs <= maxHoursPerMonth && totalWorkingDays < numOfWorkingDays)
             {
                 totalWorkingDays++;
-                Random random = new Random();
-                int empCheck = random.Next(0, 3);
-                switch (empCheck)
-                {
-                    case IS_FULL_TIME:
-                        empHrs = 8;
-                        break;
-                    case IS_PART_TIME:
-                        empHrs = 4;
-                        break;
-                    default:
-                        empHrs = 0;
-                        break;
-                }
+                empHrs = CalculateWorkHrs();
                 totalEmpHrs += empHrs;
-                //Console.WriteLine("Employee worked for " + empHrs + " hours on day " + totalWorkingDays);
                 Console.WriteLine("Day# " + totalWorkingDays + " - Emp Hours : " + empHrs);
-
             }
-            return totalEmpHrs * WAGE_PER_HOUR;
-
+            int totalEmpWage = totalEmpHrs * empRatePerHour;
+            Console.WriteLine("Total Employee wage for company " + company + " is " + totalEmpWage +"\n");
         }
         static void Main(string[] args)
         {
-            int totalEmpWage = ComputeEmpWage();
-            Console.WriteLine("Total employee wage for the month :" + totalEmpWage);
+            Console.WriteLine("Welcome to Employee Wage Computation Program!\n");
+            ComputeEmpWage("DMart", 20, 2, 10);
+            ComputeEmpWage("Reliance", 10, 4, 20);
         }
 
     }
