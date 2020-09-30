@@ -6,30 +6,38 @@ namespace Employee_Wage_Computation_OOPS
     {
         static void Main(string[] args)
         {
-            //constants
-            const int WAGE_PER_HOUR = 20;
+            //Constants
             const int IS_FULL_TIME = 1;
             const int IS_PART_TIME = 2;
+            const int WAGE_PER_HOUR = 20;
+            const int NUM_OF_WORKING_DAYS = 20;
             //variables
             int empHrs = 0;
+            int empCheck = 0;
             int empWage = 0;
-            Random random = new Random();
-            int empCheck = random.Next(0, 3);
-            //switch case to calculate part time wages
-            switch (empCheck)
+            int totalEmpWage = 0;
+            //Computation of monthly wage of employee
+            for (int day = 1; day < NUM_OF_WORKING_DAYS + 1; day++)
             {
-                case IS_FULL_TIME:
-                    empHrs = 8;
-                    break;
-                case IS_PART_TIME:
-                    empHrs = 4;
-                    break;
-                default:
-                    empHrs = 0;
-                    break;
+                Random random = new Random();
+                empCheck = random.Next(0, 3);
+                switch (empCheck)
+                {
+                    case IS_FULL_TIME:
+                        empHrs = 8;
+                        break;
+                    case IS_PART_TIME:
+                        empHrs = 4;
+                        break;
+                    default:
+                        empHrs = 0;
+                        break;
+                }
+                empWage = empHrs * WAGE_PER_HOUR;
+                totalEmpWage += empWage;
+                Console.WriteLine("Employee wage for day " + day + ":" + empWage);
             }
-            empWage = empHrs * WAGE_PER_HOUR;
-            Console.WriteLine("Employee wage :" + empWage);
+            Console.WriteLine("Monthly wage of the employee:" + totalEmpWage);
         }
     }
 }
