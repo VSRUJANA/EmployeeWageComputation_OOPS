@@ -4,25 +4,24 @@ namespace Employee_Wage_Computation_OOPS
 {
     class Program
     {
-        static void Main(string[] args)
+        //constants
+        public const int IS_FULL_TIME = 1;
+        public const int IS_PART_TIME = 2;
+        public const int WAGE_PER_HOUR = 20;
+        public const int NUM_OF_WORKING_DAYS = 20;
+        public const int MAX_HRS_IN_MONTH = 100;
+        public static int ComputeEmpWage()
         {
-            //Constants
-            const int IS_FULL_TIME = 1;
-            const int IS_PART_TIME = 2;
-            const int WAGE_PER_HOUR = 20;
-            const int NUM_OF_WORKING_DAYS = 20;
-            const int MAX_HRS_PER_MONTH = 100;
             //variables
             int empHrs = 0;
-            int empCheck = 0;
-            int totalWorkingDays = 0;
             int totalEmpHrs = 0;
-            //Computation of monthly wage of employee
-            while (totalEmpHrs <= MAX_HRS_PER_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS)
+            int totalWorkingDays = 0;
+            //Computation
+            while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS)
             {
                 totalWorkingDays++;
                 Random random = new Random();
-                empCheck = random.Next(0, 3);
+                int empCheck = random.Next(0, 3);
                 switch (empCheck)
                 {
                     case IS_FULL_TIME:
@@ -36,10 +35,18 @@ namespace Employee_Wage_Computation_OOPS
                         break;
                 }
                 totalEmpHrs += empHrs;
-                Console.WriteLine("Employee worked for " + empHrs + " hours on day " + totalWorkingDays);
+                //Console.WriteLine("Employee worked for " + empHrs + " hours on day " + totalWorkingDays);
+                Console.WriteLine("Day# " + totalWorkingDays + " - Emp Hours : " + empHrs);
+
             }
-            int totalEmpWage = totalEmpHrs * WAGE_PER_HOUR;
+            return totalEmpHrs * WAGE_PER_HOUR;
+
+        }
+        static void Main(string[] args)
+        {
+            int totalEmpWage = ComputeEmpWage();
             Console.WriteLine("Total employee wage for the month :" + totalEmpWage);
         }
+
     }
 }
