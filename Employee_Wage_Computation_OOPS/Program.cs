@@ -2,11 +2,23 @@
 
 namespace Employee_Wage_Computation_OOPS
 {
-    class Program
+    class EmployeeWageBuilder
     {
         //constants
         public const int IS_FULL_TIME = 1;
         public const int IS_PART_TIME = 2;
+        //variables
+        string company;
+        int noOfWorkingDays;
+        int maxWorkingHrs;
+        int empRatePerHr;
+        public EmployeeWageBuilder(string company, int empRatePerHr, int noOfWorkingDays, int maxWorkingHrs)
+        {
+            this.company = company;
+            this.empRatePerHr = empRatePerHr;
+            this.noOfWorkingDays = noOfWorkingDays;
+            this.maxWorkingHrs = maxWorkingHrs;
+        }
         public static int CalculateWorkHrs()
         {
             Random random = new Random();
@@ -26,29 +38,33 @@ namespace Employee_Wage_Computation_OOPS
             }
             return workHrs;
         }
-        public static void ComputeEmpWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)
+        public int ComputeEmpWage()
         {
             //variables
-            int empHrs = 0;
-            int totalEmpHrs = 0;
+            int monthlySalary = 0;
+            int totalWorkingHrs = 0;
             int totalWorkingDays = 0;
-            Console.WriteLine("Employee wage details of " + company + " : ");
-            //Computation
-            while (totalEmpHrs <= maxHoursPerMonth && totalWorkingDays < numOfWorkingDays)
+            Console.WriteLine("\nCompany: " + company);
+            Random random = new Random();
+            while (totalWorkingHrs <= maxWorkingHrs && totalWorkingDays < noOfWorkingDays)
             {
+                int empCheck = random.Next(0, 3);
                 totalWorkingDays++;
-                empHrs = CalculateWorkHrs();
-                totalEmpHrs += empHrs;
-                Console.WriteLine("Day# " + totalWorkingDays + " - Emp Hours : " + empHrs);
+                int empHrs = CalculateWorkHrs();
+                totalWorkingHrs += empHrs;
+                Console.WriteLine("Day " + totalWorkingDays + " - Working Hours: " + empHrs);
             }
-            int totalEmpWage = totalEmpHrs * empRatePerHour;
-            Console.WriteLine("Total Employee wage for company " + company + " is " + totalEmpWage +"\n");
+            monthlySalary = totalWorkingHrs * empRatePerHr;
+            return monthlySalary;
+            
         }
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Employee Wage Computation Program!\n");
-            ComputeEmpWage("DMart", 20, 2, 10);
-            ComputeEmpWage("Reliance", 10, 4, 20);
+            Console.WriteLine("Welcome to Employee Wage Computation Program!");
+            EmployeeWageBuilder dmart = new EmployeeWageBuilder("DMart", 20, 2, 10);
+            Console.WriteLine("Total wage for DMart : " + dmart.ComputeEmpWage());
+            EmployeeWageBuilder reliance = new EmployeeWageBuilder("Reliance", 10, 4, 20);
+            Console.WriteLine("Total wage for Reliance : " + reliance.ComputeEmpWage());
         }
 
     }
