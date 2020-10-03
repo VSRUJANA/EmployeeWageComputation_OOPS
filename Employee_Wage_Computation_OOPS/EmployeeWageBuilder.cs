@@ -3,7 +3,7 @@ using System;
 
 namespace EmployeeWageComputation
 {
-    class EmployeeWageBuilder
+    class EmployeeWageBuilder : IComputeEmpWage
     {
         //constants
         public const int IS_FULL_TIME = 1;
@@ -27,37 +27,31 @@ namespace EmployeeWageComputation
                 Console.WriteLine(CompanyEmpWageArray[i].Display());
             }
         }
-        static int EmployeeHours(int empCheck)
-        {
-            int empHrs = 0;
-            switch (empCheck)
-            {
-                case IS_FULL_TIME:
-                    empHrs = 8;
-                    break;
-                case IS_PART_TIME:
-                    empHrs = 4;
-                    break;
-                default:
-                    empHrs = 0;
-                    break;
-            }
-            return empHrs;
-        }
         public int EmployeeWageComputation(CompanyEmpWage empwage)
         {
             int monthlySalary = 0;
             int totalWorkingHrs = 0;
             int totalWorkingDays = 0;
+            int empHrs = 0;
             Random random = new Random();
-            Console.WriteLine("\n");
             while (totalWorkingHrs <= empwage.maxWorkingHrs && totalWorkingDays < empwage.noOfWorkingDays)
             {
-                int empCheck = random.Next(0, 3);
                 totalWorkingDays++;
-                int empHrs = EmployeeHours(empCheck);
+                int empCheck = random.Next(0, 3);
+                switch (empCheck)
+                {
+                    case IS_FULL_TIME:
+                        empHrs = 8;
+                        break;
+                    case IS_PART_TIME:
+                        empHrs = 4;
+                        break;
+                    default:
+                        empHrs = 0;
+                        break;
+                }
                 totalWorkingHrs += empHrs;
-                Console.WriteLine("Day " + totalWorkingDays + " - Working Hours: " + empHrs);
+                Console.WriteLine("Working day: " + totalWorkingDays + " Working Hours: " + empHrs);
             }
             monthlySalary = totalWorkingHrs * empwage.empRatePerHr;
             return monthlySalary;

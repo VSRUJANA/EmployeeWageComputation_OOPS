@@ -2,6 +2,12 @@
 
 namespace Employee_Wage_Computation_OOPS
 {
+    public interface IComputeEmpWage
+    {
+        void AddCompanyEmpWage(string company, int empRatePerHr, int noOfWorkingDays, int maxWorkingHrs);
+        void ComputeEmpWage();
+        int EmployeeWageComputation(CompanyEmpWage empwage);
+    }
     public class CompanyEmpWage
     {
         public string company;
