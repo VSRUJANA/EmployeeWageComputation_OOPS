@@ -1,5 +1,6 @@
 ﻿using Employee_Wage_Computation_OOPS;
 using System;
+using System.Collections;
 
 namespace EmployeeWageComputation
 {
@@ -9,22 +10,20 @@ namespace EmployeeWageComputation
         public const int IS_FULL_TIME = 1;
         public const int IS_PART_TIME = 2;
         int noOfCompanies = 0;
-        CompanyEmpWage[] CompanyEmpWageArray;
-        public EmployeeWageBuilder()
-        {
-            this.CompanyEmpWageArray = new CompanyEmpWage[10];
-        }
+        public ArrayList CompanyEmpWageList = new ArrayList();
         public void AddCompanyEmpWage(string company, int empRatePerHr, int noOfWorkingDays, int maxWorkingHrs)
         {
-            CompanyEmpWageArray[noOfCompanies] = new CompanyEmpWage(company, empRatePerHr, noOfWorkingDays, maxWorkingHrs);
+            CompanyEmpWage c = new CompanyEmpWage(company, empRatePerHr, noOfWorkingDays, maxWorkingHrs);
+            CompanyEmpWageList.Insert(noOfCompanies, c);
             noOfCompanies++;
         }
         public void ComputeEmpWage()
         {
             for (int i = 0; i < noOfCompanies; i++)
             {
-                CompanyEmpWageArray[i].SetTotalEmpWage(this.EmployeeWageComputation(this.CompanyEmpWageArray[i]));
-                Console.WriteLine(CompanyEmpWageArray[i].Display());
+                CompanyEmpWage c = (CompanyEmpWage)CompanyEmpWageList[i];
+                c.SetTotalEmpWage(this.EmployeeWageComputation(c));
+                Console.WriteLine(c.Display());
             }
         }
         public int EmployeeWageComputation(CompanyEmpWage empwage)
@@ -51,7 +50,7 @@ namespace EmployeeWageComputation
                         break;
                 }
                 totalWorkingHrs += empHrs;
-                Console.WriteLine("Working day: " + totalWorkingDays + " Working Hours: " + empHrs);
+                Console.WriteLine("Day " + totalWorkingDays + " - Working Hours: " + empHrs);
             }
             monthlySalary = totalWorkingHrs * empwage.empRatePerHr;
             return monthlySalary;
