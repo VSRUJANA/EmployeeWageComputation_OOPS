@@ -28,7 +28,7 @@ namespace Employee_Wage_Computation_OOPS
         }
         public string Display()
         {
-            return "Total employee wage for company " + this.company + " is " + this.totalEmpWage;
+            return "Total employee wage for company " + this.company + " is " + this.totalEmpWage+"\n";
         }
     }
 }
